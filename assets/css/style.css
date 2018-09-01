@@ -9,3 +9,46 @@ html, body {
 body {
     background: url(../images/bg.jpg) no-repeat center top;
 }
+
+/* Text */
+h1, h2, h3 {
+    text-align: center;
+    color: white;
+}
+
+h3 {
+    text-decoration: underline;
+    margin-top: 30px;
+}
+
+/* Containers */
+
+div.main-container {
+    width: 1006px;
+    height: 700px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 3px solid rebeccapurple;
+    background-color: rgba(0, 0,0, 0.4);
+}
+
+div.char-container {
+    width: 250px;
+    height: 700px;
+    float: left;
+}
+
+div.battleground {
+    width: 500px;
+    height: 700px;
+    float: left;
+}
+
+div.players {
+    margin: 0 auto;
+    position: relative;
+    width: 200px;
+    height: 500px;
+    border: 1px solid rebeccapurple;
+}
