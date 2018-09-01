@@ -1,0 +1,11 @@
+/* style.css */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background: url(../images/bg.jpg) no-repeat center top;
+}
