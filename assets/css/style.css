@@ -85,16 +85,18 @@ div.char-card {
     /* The Player and Enemy main container. Hidden until jQuery exposes it */
     width: 198px;
     height: 150px;
-    /* display: none; */
+    display: none;
 }
 
 div.char-img {
     /* The middle of the char container; holds the image */
     width: inherit;
     height: 100px;
+    display: inherit;
 }
 
 div.char-text {
     width: inherit;
     height: 25px;
+    display: inherit;
 }
