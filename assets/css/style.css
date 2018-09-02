@@ -37,7 +37,7 @@ div.main-container {
 
 div.char-container {
     width: 250px;
-    height: 700px;
+    height: 600px;
     float: left;
 }
 
@@ -77,4 +77,24 @@ div.action-text {
     height: 200px;
     margin: 0 auto;
     border: 1px solid rebeccapurple;
+}
+
+/* Character Tiles */
+
+div.char-card {
+    /* The Player and Enemy main container. Hidden until jQuery exposes it */
+    width: 198px;
+    height: 150px;
+    /* display: none; */
+}
+
+div.char-img {
+    /* The middle of the char container; holds the image */
+    width: inherit;
+    height: 100px;
+}
+
+div.char-text {
+    width: inherit;
+    height: 25px;
 }

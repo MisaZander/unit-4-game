@@ -31,7 +31,15 @@ var game = {
 
     init: function() {
         this.stage = 1;
+        this.buildChars();
         this.executeStep();
+    },
+
+    buildChars: function() {
+        //Create all the character divs and hide them
+        for(let i = 0; i < game.players.length; i++){
+            
+        }
     },
 
     executeStep: function() {
