@@ -131,7 +131,7 @@ var game = {
                     //$("#player" + i).css("display", "none");
                     if(!game.players[i].player) {
                         $("#enemy" + i).css("display", "block"); //Show ONLY enemies who aren't the selected player
-                    }
+                    } 
                 }
                 break;
             default:
