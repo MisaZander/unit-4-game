@@ -123,6 +123,8 @@ div.arena-vs {
     padding-top: 125px;
 }
 
-div.arena-vs h2 {
-    top: 50%;
+div.arena-char-third {
+    width: 200px;
+    height: 100px;
+    bottom: 0;
 }

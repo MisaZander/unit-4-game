@@ -113,6 +113,9 @@ var game = {
             $("#enemies").append(newCard);
         } //Enemy for loop
 
+        //Add players to the left side of the arena, hidden
+        
+
 
     }, //this.buildChars()
 
