@@ -114,7 +114,47 @@ var game = {
         } //Enemy for loop
 
         //Add players to the left side of the arena, hidden
-        
+        for(let i = 0; i < game.players.length; i++){
+            var newCard = $("<div>");
+            newCard.attr("id", "hero" + i); //#hero0, so jQuery knows who to set to display
+            newCard.attr("class", "arena-char");
+
+            //Health bar
+            var healthContainer = $("<div>"); //The top third of newCard
+            healthContainer.attr("class", "arena-char-third fopplebottom");
+            var BSHealthContainer = $("<div>"); //Create the main BG progres bar
+            BSHealthContainer.attr("class", "progress");
+            var BSHealth = $("<div>"); //Create the actual progress bar
+            BSHealth.attr("id", "hero-health" + i); //Target health bar every time a damage event occurs
+            //Set the other required BS attributes for the health bar
+            BSHealth.attr("class", "progress-bar bg-success");
+            BSHealth.css("width", "100%");
+            BSHealth.text("100%");
+            //Make attachments
+            BSHealthContainer.append(BSHealth);
+            healthContainer.append(BSHealthContainer);
+
+            //Image container
+            var imageContainer = $("<div>");
+            imageContainer.attr("class", "arena-char-third");
+            var image = $("<img>");
+            image.attr("src", game.players[i].img);
+            imageContainer.append(image);
+
+            //Name Container
+            var nameContainer = $("<div>");
+            nameContainer.attr("class", "arena-char-third");
+            name = $("<h1>");
+            name.text(game.players[i].name);
+            nameContainer.append(name);
+
+            //Build the card
+            newCard.append(healthContainer);
+            newCard.append(imageContainer);
+            newCard.append(nameContainer);
+
+            $("#arena-left").append(newCard);
+        }
 
 
     }, //this.buildChars()
@@ -134,7 +174,9 @@ var game = {
                     //$("#player" + i).css("display", "none");
                     if(!game.players[i].player) {
                         $("#enemy" + i).css("display", "block"); //Show ONLY enemies who aren't the selected player
-                    } 
+                    } else {
+                        $("#hero" + i).css("display", "block");
+                    }
                 }
                 break;
             default:

@@ -110,7 +110,7 @@ div.char-text {
     position: relative;
 } */
 
-div.arena-char {
+div.arena-char-container {
     width: 200px;
     height: 300px;
     float: left;
@@ -123,8 +123,18 @@ div.arena-vs {
     padding-top: 125px;
 }
 
+div.arena-char {
+    width: 200px;
+    height: 300px;
+    display: none;
+}
+
 div.arena-char-third {
     width: 200px;
     height: 100px;
-    bottom: 0;
+    position: relative;
+}
+
+.fopplebottom {
+    padding-top: 80px;
 }
