@@ -5,24 +5,28 @@ var game = {
     players: [
         {name: "Booples McGee",
          player: false,
+         enemy: false,
          HP: 120,
          BAP: 20,
          CAP: 15,
          img: "assets/images/BM.png"}, //Images are relative to the HTML file
         {name: "Random Fedora",
          player: false,
+         enemy: false,
          HP: 100,
          BAP: 30,
          CAP: 20,
          img: "assets/images/fedora.png"},
         {name: "Bachelor Party",
          player: false,
+         enemy: false,
          HP: 140,
          BAP: 15,
          CAP: 25,
          img: "assets/images/BP.png"},
         {name: "Stretchy Death",
          player: false,
+         enemy: false,
          HP: 150,
          BAP: 35,
          CAP: 30,
@@ -37,6 +41,10 @@ var game = {
         //For debugging: Choose Booples as the player and show the enemies
         this.players[0].player = true;
         this.stage = 2; //Stage 2: player selected, show the enemies
+        this.executeStep();
+        //For debugging: Choose Stretchy Death as the opponent
+        this.players[3].enemy = true;
+        this.stage = 3;
         this.executeStep();
     },
 
@@ -156,6 +164,49 @@ var game = {
             $("#arena-left").append(newCard);
         }
 
+        //Add enemies to the right side of the arena, hidden
+        for(let i = 0; i < game.players.length; i++){
+            var newCard = $("<div>");
+            newCard.attr("id", "opponent" + i); //#hero0, so jQuery knows who to set to display
+            newCard.attr("class", "arena-char");
+
+            //Health bar
+            var healthContainer = $("<div>"); //The top third of newCard
+            healthContainer.attr("class", "arena-char-third fopplebottom");
+            var BSHealthContainer = $("<div>"); //Create the main BG progres bar
+            BSHealthContainer.attr("class", "progress");
+            var BSHealth = $("<div>"); //Create the actual progress bar
+            BSHealth.attr("id", "hero-health" + i); //Target health bar every time a damage event occurs
+            //Set the other required BS attributes for the health bar
+            BSHealth.attr("class", "progress-bar bg-success");
+            BSHealth.css("width", "100%");
+            BSHealth.text("100%");
+            //Make attachments
+            BSHealthContainer.append(BSHealth);
+            healthContainer.append(BSHealthContainer);
+
+            //Image container
+            var imageContainer = $("<div>");
+            imageContainer.attr("class", "arena-char-third");
+            var image = $("<img>");
+            image.attr("src", game.players[i].img);
+            imageContainer.append(image);
+
+            //Name Container
+            var nameContainer = $("<div>");
+            nameContainer.attr("class", "arena-char-third");
+            name = $("<h1>");
+            name.text(game.players[i].name);
+            nameContainer.append(name);
+
+            //Build the card
+            newCard.append(healthContainer);
+            newCard.append(imageContainer);
+            newCard.append(nameContainer);
+
+            $("#arena-right").append(newCard);
+        }
+
 
     }, //this.buildChars()
 
@@ -168,7 +219,7 @@ var game = {
                     $("#player" + i).css("display", "block");
                 }
                 break;
-            case 2:
+            case 2: //Player selected
                 for(let i = 0; i < game.players.length; i++){
                     //Debugging: comment out the player hiding
                     //$("#player" + i).css("display", "none");
@@ -176,6 +227,13 @@ var game = {
                         $("#enemy" + i).css("display", "block"); //Show ONLY enemies who aren't the selected player
                     } else {
                         $("#hero" + i).css("display", "block");
+                    }
+                }
+                break;
+            case 3: //Enemy selected
+                for(let i = 0; i < game.players.length; i++){
+                    if(game.players[i].enemy){
+                        $("#opponent" + i).css("display", "block");
                     }
                 }
                 break;
