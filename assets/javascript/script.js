@@ -253,11 +253,18 @@ var game = {
 //main
 game.init();
 
-//Set stage 1 click events
+//Set click events
 for(let i = 0; i < game.players.length; i++) {
     $("#player" + i).on("click", function() {
+        //Set stage 1 click events
         game.players[i].player = true;
         game.stage = 2;
+        game.executeStep();
+    });
+
+    $("#enemy" + i).on("click", function() {
+        game.players[i].enemy = true;
+        game.stage = 3;
         game.executeStep();
     });
 }
