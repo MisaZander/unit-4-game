@@ -33,24 +33,24 @@ var game = {
          img: "assets/images/SD.png"}
     ],
 
-    init: async function() {
+    init: function() {
         this.stage = 1; //Step 1: show all the players
         this.buildChars();
         this.executeStep();
-        await sleep(10000);
+        //await sleep(10000);
 
-        //For debugging: Choose Booples as the player and show the enemies
-        this.players[0].player = true;
-        this.stage = 2; //Stage 2: player selected, show the enemies
-        this.executeStep();
-        await sleep(5000);
+        // //For debugging: Choose Booples as the player and show the enemies
+        // this.players[0].player = true;
+        // this.stage = 2; //Stage 2: player selected, show the enemies
+        // this.executeStep();
+        // await sleep(5000);
         
         
-        //For debugging: Choose Stretchy Death as the opponent
-        this.players[3].enemy = true;
-        this.stage = 3;
-        this.executeStep();
-        await sleep(5000);
+        // //For debugging: Choose Stretchy Death as the opponent
+        // this.players[3].enemy = true;
+        // this.stage = 3;
+        // this.executeStep();
+        // await sleep(5000);
     },
 
     buildChars: function() {
@@ -226,7 +226,6 @@ var game = {
                 break;
             case 2: //Player selected
                 for(let i = 0; i < game.players.length; i++){
-                    //Debugging: comment out the player hiding
                     $("#player" + i).css("display", "none");
                     if(!game.players[i].player) {
                         $("#enemy" + i).css("display", "block"); //Show ONLY enemies who aren't the selected player
@@ -251,9 +250,14 @@ var game = {
     } //this.executeStep()
 }; //game object
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 //main
 game.init();
+
+//Set stage 1 click events
+for(let i = 0; i < game.players.length; i++) {
+    $("#player" + i).on("click", function() {
+        game.players[i].player = true;
+        game.stage = 2;
+        game.executeStep();
+    });
+}
