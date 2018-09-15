@@ -2,10 +2,14 @@
 
 var game = {
     stage: 1,
+    combatants: [-1, -1],
+    HP: [0, 0],
+    attack: 0,
     players: [
         {name: "Booples McGee",
          player: false,
          enemy: false,
+         isAlive: true,
          HP: 120,
          BAP: 20,
          CAP: 15,
@@ -13,6 +17,7 @@ var game = {
         {name: "Random Fedora",
          player: false,
          enemy: false,
+         isAlive: true,
          HP: 100,
          BAP: 30,
          CAP: 20,
@@ -20,6 +25,7 @@ var game = {
         {name: "Bachelor Party",
          player: false,
          enemy: false,
+         isAlive: true,
          HP: 140,
          BAP: 15,
          CAP: 25,
@@ -27,30 +33,18 @@ var game = {
         {name: "Stretchy Death",
          player: false,
          enemy: false,
+         isAlive: true,
          HP: 150,
          BAP: 35,
          CAP: 30,
          img: "assets/images/SD.png"}
     ],
 
-    init: async function() {
+    init: function() {
         this.stage = 1; //Step 1: show all the players
         this.buildChars();
         this.executeStep();
-        await sleep(10000);
-
-        //For debugging: Choose Booples as the player and show the enemies
-        this.players[0].player = true;
-        this.stage = 2; //Stage 2: player selected, show the enemies
-        this.executeStep();
-        await sleep(5000);
         
-        
-        //For debugging: Choose Stretchy Death as the opponent
-        this.players[3].enemy = true;
-        this.stage = 3;
-        this.executeStep();
-        await sleep(5000);
     },
 
     buildChars: function() {
@@ -223,10 +217,12 @@ var game = {
                     //Reveal the players
                     $("#player" + i).css("display", "block");
                 }
+                $("#first-line").text("Welcome to Star Wars: The RPG!");
+                $("#second-line").text("Select your hero to begin.");
+                $("#third-line").text("");
                 break;
             case 2: //Player selected
                 for(let i = 0; i < game.players.length; i++){
-                    //Debugging: comment out the player hiding
                     $("#player" + i).css("display", "none");
                     if(!game.players[i].player) {
                         $("#enemy" + i).css("display", "block"); //Show ONLY enemies who aren't the selected player
@@ -234,6 +230,9 @@ var game = {
                         $("#hero" + i).css("display", "block");
                     }
                 }
+                $("#first-line").text("Now select your opponent to start the fight.");
+                $("#second-line").text("");
+                $("#third-line").text("");
                 break;
             case 3: //Enemy selected
                 for(let i = 0; i < game.players.length; i++){
@@ -241,7 +240,6 @@ var game = {
                         $("#opponent" + i).css("display", "block"); //Add enemy to the arena...
                         $("#enemy" + i).css("display", "none");//...and boot them out of the enemy area
                     }
-
                 }
                 break;
             default:
@@ -251,9 +249,35 @@ var game = {
     } //this.executeStep()
 }; //game object
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 //main
 game.init();
+
+//Set click events
+for(let i = 0; i < game.players.length; i++) {
+    $("#player" + i).on("click", function() {
+        //Set stage 1 click events
+        game.players[i].player = true;
+        game.stage = 2;
+        game.executeStep();
+        game.combatants[0] = i;
+        //console.log("Player Chosen: " + game.combatants[0]);
+
+    });
+
+    $("#enemy" + i).on("click", function() {
+        game.players[i].enemy = true;
+        game.stage = 3;
+        game.executeStep();
+        game.combatants[1] = i;
+        console.log("Enemy Chosen: " + game.combatants[1]);
+    });
+}
+
+$("#attack-btn").on("click", function() {
+    if(game.stage === 4) {
+
+    } else {
+        alert("Please fill the arena");
+    }
+});
+
